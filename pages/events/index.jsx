@@ -1,11 +1,10 @@
-import { getAllEvents } from "../../dummy-data";
 import EventList from "../../components/events/EventList";
 import EventsSearch from "../../components/events/EventsSearch";
 import { Fragment } from "react";
 import { useRouter } from "next/router";
+import { getAllEvents } from "./../../helpers/api-utils";
 
-export default function AllEvents() {
-  const events = getAllEvents();
+export default function AllEvents(props) {
   const router = useRouter();
 
   function findEventsHandler(year, month) {
@@ -16,7 +15,17 @@ export default function AllEvents() {
   return (
     <Fragment>
       <EventsSearch onSearch={findEventsHandler} />
-      <EventList items={events} />
+      <EventList items={props.events} />
     </Fragment>
   );
+}
+
+export async function getStaticProps(context) {
+  const allEvents = await getAllEvents();
+
+  return {
+    props: {
+      events: allEvents,
+    },
+  };
 }

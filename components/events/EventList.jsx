@@ -21,7 +21,3 @@ export default function EventList(props) {
     </ul>
   );
 }
-
-// <Link href="/" className="some-class">
-// Click me
-// </Link>
