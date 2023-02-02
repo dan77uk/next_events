@@ -1,5 +1,5 @@
 import classes from "./EventItem.module.css";
-import Button from "../ui/Button";
+import ButtonLink from "../ui/ButtonLink";
 import DateIcon from "../icons/date-icon";
 import AddressIcon from "../icons/address-icon";
 
@@ -32,7 +32,7 @@ export default function EventItem(props) {
           </div>
         </div>
         <div className={classes.actions}>
-          <Button link={exploreLink}>Explore Event</Button>
+          <ButtonLink link={exploreLink}>Explore Event</ButtonLink>
         </div>
       </div>
     </li>

@@ -1,4 +1,4 @@
-import Button from "../ui/button";
+import ButtonLink from "../ui/ButtonLink";
 import classes from "./resultsTitle.module.css";
 
 export default function ResultsTitle(props) {
@@ -12,7 +12,7 @@ export default function ResultsTitle(props) {
   return (
     <section className={classes.title}>
       <h1>Events in {humanReadableDate}</h1>
-      <Button link="/events">Show all events</Button>
+      <ButtonLink link="/events">Show all events</ButtonLink>
     </section>
   );
 }

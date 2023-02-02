@@ -1,7 +1,7 @@
 import Link from "next/link";
 import classes from "./Button.module.css";
 
-export default function Button(props) {
+export default function ButtonLink(props) {
   if (props.link) {
     return (
       <Link href={props.link} className={classes.btn}>
