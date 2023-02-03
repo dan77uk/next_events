@@ -1,3 +1,4 @@
+import Head from "next/head";
 import EventList from "../components/events/EventList";
 import NewsletterRegistration from "../components/input/newsletterRegistration";
 import { getFeaturedEvents } from "../helpers/api-utils";
@@ -8,7 +9,6 @@ export default function Homepage(props) {
 
   return (
     <>
-      <Head>
         <title>Event Homepage</title>
         <meta
           name="description"
