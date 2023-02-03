@@ -1,19 +1,21 @@
 import Head from "next/head";
 import EventList from "../components/events/EventList";
+import NewsletterRegistration from "../components/input/newsletterRegistration";
 import { getFeaturedEvents } from "../helpers/api-utils";
+import Head from "next/head";
 
 export default function Homepage(props) {
   const featuredEvents = getFeaturedEvents();
 
   return (
     <>
-      <Head>
-        <title>Next Events | Developed by Dan Phillips</title>
+        <title>Event Homepage</title>
         <meta
           name="description"
-          content="The best events for the type of people who attend these events"
+          content="Some page description to be decided"
         />
       </Head>
+      <NewsletterRegistration />
       <EventList items={props.events} />
     </>
   );

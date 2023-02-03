@@ -4,6 +4,7 @@ import { getEventById, getFeaturedEvents } from "../../helpers/api-utils";
 import EventSummary from "../../components/event-detail/event-summary";
 import EventLogistics from "../../components/event-detail/event-logistics";
 import EventContent from "../../components/event-detail/event-content";
+import Comments from "../../components/input/comments";
 
 export default function EventDetailPage(props) {
   const event = props.event;
@@ -32,6 +33,7 @@ export default function EventDetailPage(props) {
         imageAlt={event.title}
       />
       <EventContent>{event.description}</EventContent>
+      <Comments eventId={event.id} />
     </Fragment>
   );
 }

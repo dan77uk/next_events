@@ -2,7 +2,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   padding: 1rem 10%;
   height: 5rem;
   background-color: #202020;
@@ -24,10 +24,17 @@
   color: #94fdfd;
 }
 
+.navigation ul {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  font-size: 0.8rem;
+}
+
 .navigation a {
   text-decoration: none;
   color: #74dacc;
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 @media (min-width: 768px) {

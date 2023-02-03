@@ -10,6 +10,9 @@ export default function MainHeader() {
       <nav className={classes.navigation}>
         <ul>
           <li>
+            <Link href="/add-event">Add An Event</Link>
+          </li>
+          <li>
             <Link href="/events">Browse All Events</Link>
           </li>
         </ul>
