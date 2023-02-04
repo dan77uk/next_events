@@ -1,5 +1,19 @@
-export default function handler(req, res) {
+import {
+  connectDatabase,
+  insertDocument,
+  getAllDocuments,
+} from "../../../helpers/db-util";
+
+export default async function handler(req, res) {
   const { eventId } = req.query;
+
+  let client;
+  try {
+    client = await connectDatabase();
+  } catch (error) {
+    res.status(500).send({ message: "Connecting to database failed" });
+    return;
+  }
 
   if (req.method === "POST") {
     // add server validation
@@ -13,43 +27,41 @@ export default function handler(req, res) {
       text.trim() === 0
     ) {
       res.status(422).send({ message: "Invalid Input" });
+      client.close();
       return;
     }
 
     const newComment = {
-      id: new Date().toISOString(),
+      eventId: eventId,
+      date: new Date().toISOString(),
       email,
       name,
       text,
     };
 
-    res.status(201).send({ message: "Comment added", comment: newComment });
+    let result;
+    try {
+      result = await insertDocument(client, "comments", newComment);
+      newComment.id = result.insertedId;
+      res.status(201).send({ message: "Comment added", comment: newComment });
+    } catch (error) {
+      res.status(500).send({ message: "Inserting comment failed" });
+    }
   }
-  if (req.method === "GET") {
-    const dummyList = [
-      {
-        id: "c1",
-        name: "Dan",
-        email: "dan@email.com",
-        comment:
-          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      },
-      {
-        id: "c2",
-        name: "Emma",
-        email: "emma@email.com",
-        comment:
-          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      },
-      {
-        id: "c3",
-        name: "Alan",
-        email: "alan@email.com",
-        comment:
-          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      },
-    ];
 
-    res.status(200).send({ comments: dummyList });
+  if (req.method === "GET") {
+    try {
+      const comments = await getAllDocuments(
+        client,
+        "comments",
+        { _id: -1 },
+        { eventId: eventId }
+      );
+      res.status(200).send({ comments: comments });
+    } catch (error) {
+      res.status(500).send({ message: "Could not collect comments" });
+    }
   }
+
+  client.close();
 }

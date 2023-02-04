@@ -5,8 +5,8 @@ export default function CommentList({ comments }) {
     <ul className={classes.comments}>
       {comments.map((comment) => {
         return (
-          <li key={comment.id}>
-            <p>{comment.comment}</p>
+          <li key={comment._id}>
+            <p>{comment.text}</p>
             <div>
               By <address>{comment.name}</address>
             </div>
